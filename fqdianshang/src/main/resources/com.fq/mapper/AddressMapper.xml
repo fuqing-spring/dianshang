@@ -3,16 +3,100 @@
 <mapper namespace="com.fq.mapper.AddressMapper">
 
 
-    <insert id="insert"></insert>
+    <insert id="insert">
+         insert into jcart_address (address_id, customer_id, receiver_name,
+      receiver_mobile, content, tag
+      )
+    values (#{addressId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER}, #{receiverName,jdbcType=VARCHAR},
+      #{receiverMobile,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}
+      )
+    </insert>
 
-    <insert id="insertSelective"></insert>
+    <insert id="insertSelective">
+        insert into jcart_address
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="addressId != null">
+                address_id,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="receiverName != null">
+                receiver_name,
+            </if>
+            <if test="receiverMobile != null">
+                receiver_mobile,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="tag != null">
+                tag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="addressId != null">
+                #{addressId,jdbcType=INTEGER},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="receiverName != null">
+                #{receiverName,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverMobile != null">
+                #{receiverMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null">
+                #{tag,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
 
-    <update id="updateByPrimaryKeySelective"></update>
+    <update id="updateByPrimaryKeySelective">
+        update jcart_address
+        <set>
+            <if test="customerId != null">
+                customer_id = #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="receiverName != null">
+                receiver_name = #{receiverName,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverMobile != null">
+                receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null">
+                tag = #{tag,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where address_id = #{addressId,jdbcType=INTEGER}
+    </update>
 
-    <update id="updateByPrimaryKey"></update>
+    <update id="updateByPrimaryKey">
+          update jcart_address
+    set customer_id = #{customerId,jdbcType=INTEGER},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR}
+    where address_id = #{addressId,jdbcType=INTEGER}
+    </update>
 
 
-    <delete id="deleteByPrimaryKey"></delete>
+    <delete id="deleteByPrimaryKey">
+          delete from jcart_address
+    where address_id = #{addressId,jdbcType=INTEGER}
+    </delete>
 
-    <select id="selectByPrimaryKey" resultType="com.fq.pojo.Address"></select>
+    <select id="selectByPrimaryKey" resultType="com.fq.pojo.Address">
+        select
+        from jcart_address
+        where address_id = #{addressId,jdbcType=INTEGER}
+    </select>
 </mapper>

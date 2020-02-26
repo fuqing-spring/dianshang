@@ -1,15 +1,167 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fq.mapper.CustomerMapper">
-    <insert id="insert"></insert>
+    <select id="selectByPrimaryKey">
+        select
+        from jcart_customer
+        where customer_id = #{customerId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from jcart_customer
+        where customer_id = #{customerId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insertSelective" >
+        insert into jcart_customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="realName != null">
+                real_name,
+            </if>
+            <if test="avatarUrl != null">
+                avatar_url,
+            </if>
+            <if test="encryptedPassword != null">
+                encrypted_password,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="mobileVerified != null">
+                mobile_verified,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="emailVerified != null">
+                email_verified,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="newsSubscribed != null">
+                news_subscribed,
+            </if>
+            <if test="rewordPoints != null">
+                reword_points,
+            </if>
+            <if test="defaultAddressId != null">
+                default_address_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customerId != null">
+                #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="avatarUrl != null">
+                #{avatarUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="encryptedPassword != null">
+                #{encryptedPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="mobileVerified != null">
+                #{mobileVerified,jdbcType=BIT},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="emailVerified != null">
+                #{emailVerified,jdbcType=BIT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="newsSubscribed != null">
+                #{newsSubscribed,jdbcType=BIT},
+            </if>
+            <if test="rewordPoints != null">
+                #{rewordPoints,jdbcType=INTEGER},
+            </if>
+            <if test="defaultAddressId != null">
+                #{defaultAddressId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective">
+        update jcart_customer
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                real_name = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="avatarUrl != null">
+                avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="encryptedPassword != null">
+                encrypted_password = #{encryptedPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="mobileVerified != null">
+                mobile_verified = #{mobileVerified,jdbcType=BIT},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="emailVerified != null">
+                email_verified = #{emailVerified,jdbcType=BIT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="newsSubscribed != null">
+                news_subscribed = #{newsSubscribed,jdbcType=BIT},
+            </if>
+            <if test="rewordPoints != null">
+                reword_points = #{rewordPoints,jdbcType=INTEGER},
+            </if>
+            <if test="defaultAddressId != null">
+                default_address_id = #{defaultAddressId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where customer_id = #{customerId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" >
+        update jcart_customer
+        set username = #{username,jdbcType=VARCHAR},
+        real_name = #{realName,jdbcType=VARCHAR},
+        avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+        encrypted_password = #{encryptedPassword,jdbcType=VARCHAR},
+        mobile = #{mobile,jdbcType=VARCHAR},
+        mobile_verified = #{mobileVerified,jdbcType=BIT},
+        email = #{email,jdbcType=VARCHAR},
+        email_verified = #{emailVerified,jdbcType=BIT},
+        status = #{status,jdbcType=TINYINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        news_subscribed = #{newsSubscribed,jdbcType=BIT},
+        reword_points = #{rewordPoints,jdbcType=INTEGER},
+        default_address_id = #{defaultAddressId,jdbcType=INTEGER}
+        where customer_id = #{customerId,jdbcType=INTEGER}
+    </update>
 
-    <insert id="insertSelective"></insert>
-
-    <update id="updateByPrimaryKeySelective"></update>
-
-    <update id="updateByPrimaryKey"></update>
-
-    <delete id="deleteByPrimaryKey"></delete>
-
-    <select id="selectByPrimaryKey" resultType="com.fq.pojo.Customer"></select>
 </mapper>
