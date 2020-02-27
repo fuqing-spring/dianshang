@@ -1,38 +1,19 @@
-package com.fq.pojo;
+package com.fq.dto.in;
 
-public class Product {
-    private Integer productId;
-    private String  productCode;
+import java.util.List;
+
+public class ProductCreateInDTO {
+    private String productCode;
     private String productName;
-    private String productAbstract;
     private Double price;
     private Double discount;
-    private Integer quantity;
+    private Integer stockQuantity;
     private Byte status;
     private String mainPicUrl;
     private Integer rewordPoints;
     private Integer sortOrder;
-    public Object stokQuantity;
-
-    public void setSortOrder(Integer sortOrder) {
-        this.sortOrder = sortOrder;
-    }
-
-    public Object getStokQuantity() {
-        return stokQuantity;
-    }
-
-    public void setStokQuantity(Object stokQuantity) {
-        this.stokQuantity = stokQuantity;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
+    private String description;
+    private List<String> otherPicUrls;
 
     public String getProductCode() {
         return productCode;
@@ -48,14 +29,6 @@ public class Product {
 
     public void setProductName(String productName) {
         this.productName = productName;
-    }
-
-    public String getProductAbstract() {
-        return productAbstract;
-    }
-
-    public void setProductAbstract(String productAbstract) {
-        this.productAbstract = productAbstract;
     }
 
     public Double getPrice() {
@@ -74,12 +47,12 @@ public class Product {
         this.discount = discount;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getStockQuantity() {
+        return stockQuantity;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setStockQuantity(Integer stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
     public Byte getStatus() {
@@ -108,5 +81,25 @@ public class Product {
 
     public Integer getSortOrder() {
         return sortOrder;
+    }
+
+    public void setSortOrder(Integer sortOrder) {
+        this.sortOrder = sortOrder;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<String> getOtherPicUrls() {
+        return otherPicUrls;
+    }
+
+    public void setOtherPicUrls(List<String> otherPicUrls) {
+        this.otherPicUrls = otherPicUrls;
     }
 }

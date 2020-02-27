@@ -10,9 +10,12 @@ public class ProductShowOut {
     private Double price;
     private Double discount;
     private Integer quantity;
+    private Byte status;
     private String mainPicUrl;
+    private Integer sortOrder;
     private Integer rewordPoints;
     private List<String> otherPicUrls;
+    private Integer stockQuantity;
 
     public Integer getProductId() {
         return productId;
@@ -92,5 +95,29 @@ public class ProductShowOut {
 
     public void setOtherPicUrls(List<String> otherPicUrls) {
         this.otherPicUrls = otherPicUrls;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
+    public Integer getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(Integer sortOrder) {
+        this.sortOrder = sortOrder;
+    }
+
+    public Integer getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(Integer stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 }

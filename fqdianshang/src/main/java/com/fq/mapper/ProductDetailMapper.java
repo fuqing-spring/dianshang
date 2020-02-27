@@ -1,17 +1,25 @@
 package com.fq.mapper;
 
-import com.fq.pojo.Order;
+import com.fq.pojo.ProductDetail;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface ProductDetailMapper {
-    int deleteByPrimaryKey(Long orderId);
+    int deleteByPrimaryKey(Integer productId);
 
-    int insert(Order record);
+    int insert(ProductDetail record);
 
-    int insertSelective(Order record);
+    int insertSelective(ProductDetail record);
 
-    Order selectByPrimaryKey(Long orderId);
+    ProductDetail selectByPrimaryKey(Integer productId);
 
-    int updateByPrimaryKeySelective(Order record);
+    int updateByPrimaryKeySelective(ProductDetail record);
 
-    int updateByPrimaryKey(Order record);
+
+
+    int updateByPrimaryKey(ProductDetail record);
+
+    void batchDelete(List<Integer> productIds);
 }

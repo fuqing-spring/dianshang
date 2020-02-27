@@ -1,15 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fq.mapper.ProductDetailMapper">
-    <insert id="insert"></insert>
+    <insert id="insert">
+         insert into jcart_product_detail (product_id, other_pic_urls, description
+      )
+    values (#{productId,jdbcType=INTEGER}, #{otherPicUrls,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}
+      )
+    </insert>
 
-    <insert id="insertSelective"></insert>
+    <insert id="insertSelective">
+        insert into jcart_product_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="otherPicUrls != null">
+                other_pic_urls,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="otherPicUrls != null">
+                #{otherPicUrls,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
 
-    <update id="updateByPrimaryKeySelective"></update>
+    <update id="updateByPrimaryKeySelective">
+        update jcart_product_detail
+        <set>
+            <if test="otherPicUrls != null">
+                other_pic_urls = #{otherPicUrls,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where product_id = #{productId,jdbcType=INTEGER}
+    </update>
 
-    <update id="updateByPrimaryKey"></update>
+    <update id="updateByPrimaryKey">
+         update jcart_product_detail
+    set other_pic_urls = #{otherPicUrls,jdbcType=VARCHAR}
+    where product_id = #{productId,jdbcType=INTEGER}
+    </update>
 
-    <delete id="deleteByPrimaryKey"></delete>
+    <delete id="deleteByPrimaryKey">
+       delete from jcart_product_detail
+    where product_id = #{productId,jdbcType=INTEGER}
+    </delete>
+    <delete id="batchDelete">
+        delete from jcart_product_detail
+        where product_id in
+        <foreach item="item" index="index" collection="productIds"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 
-    <select id="selectByPrimaryKey" resultType="com.fq.pojo.Order"></select>
+    <select id="selectByPrimaryKey" resultType="com.fq.pojo.Order">
+        select
+        *
+        from jcart_product_detail
+        where product_id = #{productId,jdbcType=INTEGER}
+    </select>
 </mapper>

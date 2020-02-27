@@ -1,17 +1,23 @@
 package com.fq.mapper;
 
+import com.fq.dto.out.ProductListOut;
 import com.fq.pojo.Product;
+import com.github.pagehelper.Page;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface ProductMapper {
-    int deleteByPrimaryKey(Integer productId);
-
-    int insert(Product record);
-
-    int insertSelective(Product record);
+    Page<ProductListOut> search();
 
     Product selectByPrimaryKey(Integer productId);
 
-    int updateByPrimaryKeySelective(Product record);
+    void insertSelective(Product product);
 
-    int updateByPrimaryKey(Product record);
+    void UPdateByPrimaryKesSelective(Product product);
+
+    void deleteByPrimaryKey(Integer productId);
+
+    void batchDelete(List<Integer> productIds);
 }

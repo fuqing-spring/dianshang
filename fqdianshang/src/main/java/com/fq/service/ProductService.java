@@ -1,17 +1,24 @@
 package com.fq.service;
 
-import com.fq.pojo.Product;
+import com.fq.dto.in.ProductCreateInDTO;
+import com.fq.dto.in.ProductUpdateInDTO;
+import com.fq.dto.out.ProductListOut;
+import com.fq.dto.out.ProductShowOut;
+import com.github.pagehelper.Page;
+
+import java.util.List;
+
 
 public interface ProductService {
-    int deleteByPrimaryKey(Integer productId);
+    Page<ProductListOut> search(Integer pageNum);
 
-    int insert(Product record);
+    ProductShowOut getById(Integer productId);
 
-    int insertSelective(Product record);
+    Integer create(ProductCreateInDTO productCreateInDTO);
 
-    Product selectByPrimaryKey(Integer productId);
+    void update(ProductUpdateInDTO productUpdateInDTO);
 
-    int updateByPrimaryKeySelective(Product record);
+    void delete(Integer productId);
 
-    int updateByPrimaryKey(Product record);
+    void batchDelete(List<Integer> productIds);
 }

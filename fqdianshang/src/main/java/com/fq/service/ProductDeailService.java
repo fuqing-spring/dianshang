@@ -1,17 +1,22 @@
 package com.fq.service;
 
 import com.fq.pojo.Order;
+import com.fq.pojo.ProductDetail;
 
 public interface ProductDeailService {
-    int deleteByPrimaryKey(Long orderId);
+    int deleteByPrimaryKey(Integer productId);
 
-    int insert(Order record);
+    int insert(ProductDetail record);
 
-    int insertSelective(Order record);
+    int insertSelective(ProductDetail record);
 
-    Order selectByPrimaryKey(Long orderId);
+    ProductDetail selectByPrimaryKey(Integer productId);
 
-    int updateByPrimaryKeySelective(Order record);
+    int updateByPrimaryKeySelective(ProductDetail record);
+
+    int updateByPrimaryKeyWithBLOBs(ProductDetail record);
+
+    int updateByPrimaryKey(ProductDetail record);
 
     int updateByPrimaryKey(Order record);
 }
