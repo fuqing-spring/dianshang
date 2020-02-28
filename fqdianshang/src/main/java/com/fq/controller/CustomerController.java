@@ -11,7 +11,7 @@ public class CustomerController {
     //注册
     @PostMapping("/register")
     public Integer register(
-            CustomerRegisterIn customerRegisterInDTO
+            CustomerRegisterIn customerRegisterIn
     ){
         return null;
     }
