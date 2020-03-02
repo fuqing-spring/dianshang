@@ -12,7 +12,7 @@ public class AdministratorLoginInDTO {
         this.username = username;
     }
 
-    public String getPassword() {
+    public static String getPassword() {
         return password;
     }
 
