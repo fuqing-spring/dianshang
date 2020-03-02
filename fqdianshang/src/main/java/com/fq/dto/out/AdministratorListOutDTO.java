@@ -5,6 +5,15 @@ public class AdministratorListOutDTO {
     private String username;
     private Byte status;
     private Long createTimestamp;
+    public String RealName;
+
+    public String getRealName() {
+        return RealName;
+    }
+
+    public void setRealName(String realName) {
+        RealName = realName;
+    }
 
     public Integer getAdministratorId() {
         return administratorId;

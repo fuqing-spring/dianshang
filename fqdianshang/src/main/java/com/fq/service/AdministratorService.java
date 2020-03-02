@@ -1,6 +1,7 @@
 package com.fq.service;
 
 import com.fq.pojo.Administrator;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 
 public interface AdministratorService {
@@ -17,4 +18,10 @@ public interface AdministratorService {
     int updateByPrimaryKey(Administrator record);
 
     Administrator getByUsername(@Param("username") String userName);
+
+    Administrator getById(Integer administratorId);
+
+    void update(Administrator administrator);
+
+    Page<Administrator> getList(Integer pageNum);
 }

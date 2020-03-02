@@ -124,4 +124,7 @@
         from jcart_administrator
         where username = #{username,jdbcType=VARCHAR}
     </select>
+    <select id="getList" resultType="com.fq.pojo.Administrator">
+        select * from jcart_administrator;
+    </select>
 </mapper>

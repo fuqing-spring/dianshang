@@ -1,6 +1,7 @@
 package com.fq.mapper;
 
 import com.fq.pojo.Administrator;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +21,5 @@ public interface AdministratorMapper {
 
     Administrator getByUsername(@Param("username") String userName);
 
+    Page<Administrator> getList();
 }
