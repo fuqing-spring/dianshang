@@ -2,7 +2,9 @@ package com.fq.service.impl;
 
 import com.fq.pojo.Administrator;
 import com.fq.service.AdministratorService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public int deleteByPrimaryKey(Integer administratorId) {
