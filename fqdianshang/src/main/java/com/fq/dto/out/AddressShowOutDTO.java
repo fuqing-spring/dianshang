@@ -1,11 +1,11 @@
 package com.fq.dto.out;
 
-public class AddresListOut {
+public class AddressShowOutDTO {
     private Integer addressId;
+    private String tag;
     private String receiverName;
     private String receiverMobile;
     private String content;
-    private String tag;
 
     public Integer getAddressId() {
         return addressId;
@@ -13,6 +13,14 @@ public class AddresListOut {
 
     public void setAddressId(Integer addressId) {
         this.addressId = addressId;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public String getReceiverName() {
@@ -37,13 +45,5 @@ public class AddresListOut {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
     }
 }

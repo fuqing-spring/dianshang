@@ -1,19 +1,11 @@
-package com.fq.dto.out;
+package com.fq.dto.in;
 
-public class AddresListOut {
+public class AddressUpdateIn {
     private Integer addressId;
     private String receiverName;
     private String receiverMobile;
     private String content;
     private String tag;
-
-    public Integer getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(Integer addressId) {
-        this.addressId = addressId;
-    }
 
     public String getReceiverName() {
         return receiverName;
@@ -45,5 +37,13 @@ public class AddresListOut {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
     }
 }

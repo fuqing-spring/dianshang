@@ -99,4 +99,7 @@
         from jcart_address
         where address_id = #{addressId,jdbcType=INTEGER}
     </select>
+    <select id="selectByCustomerId" resultType="com.fq.pojo.Address">
+        select * from jcart_address WHERE customer_id=#{customerId};
+    </select>
 </mapper>

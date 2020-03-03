@@ -1,36 +1,44 @@
 package com.fq.service.impl;
 
+import com.fq.mapper.AddressMapper;
 import com.fq.pojo.Address;
 import com.fq.service.AddressService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@Service
 public class AddressServiceImpl implements AddressService {
+    @Autowired
+    private AddressMapper addressMapper;
+
     @Override
-    public int deleteByPrimaryKey(Integer addressId) {
-        return 0;
+    public List<Address> getByCustomerId(Integer customerId) {
+        List<Address> addresses=addressMapper.selectByCustomerId(customerId);
+        return addresses;
     }
 
     @Override
-    public int insert(Address address) {
-        return 0;
+    public Address getById(Integer addressId) {
+        Address address=addressMapper.selectByPrimaryKey(addressId);
+        return address;
     }
 
     @Override
-    public int insertSelective(Address address) {
-        return 0;
+    public Integer create(Address address) {
+        addressMapper.insertSelective(address);
+        Integer addressId=address.getAddressId();
+        return addressId;
     }
 
     @Override
-    public Address selectByPrimaryKey(Integer addressId) {
-        return null;
+    public void update(Address address) {
+        addressMapper.updateByPrimaryKeySelective(address);
     }
 
     @Override
-    public int updateByPrimaryKeySelective(Address address) {
-        return 0;
-    }
-
-    @Override
-    public int updateByPrimaryKey(Address address) {
-        return 0;
+    public void delete(Integer addressId) {
+        addressMapper.deleteByPrimaryKey(addressId);
     }
 }
