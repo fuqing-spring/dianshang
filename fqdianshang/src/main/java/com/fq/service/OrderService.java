@@ -1,17 +1,8 @@
 package com.fq.service;
 
-import com.fq.pojo.Order;
+import com.fq.dto.in.OrderCheckoutInDTO;
 
 public interface OrderService {
-    int deleteByPrimaryKey(Long orderId);
 
-    int insert(Order record);
-
-    int insertSelective(Order record);
-
-    Order selectByPrimaryKey(Long orderId);
-
-    int updateByPrimaryKeySelective(Order record);
-
-    int updateByPrimaryKey(Order record);
+    Long checkout(OrderCheckoutInDTO orderCheckoutInDTO, Integer customerId);
 }

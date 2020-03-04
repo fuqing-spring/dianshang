@@ -1,21 +1,23 @@
 package com.fq.controller;
 
+import com.fq.dto.in.OrderCheckoutInDTO;
 import com.fq.dto.out.OrderListOut;
 import com.fq.dto.out.OrderShowOut;
 import com.fq.dto.out.PageOut;
+import com.fq.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/prder")
+@RequestMapping("/order")
+@CrossOrigin
 public class OrderController {
+    @Autowired
+    OrderService orderService;
     @PostMapping("/checkout")
-    public Integer checkout(
-            List<OrderProductIn> orderproducts,
-            Integer customerId
-    ){
-        return null;
+    public Long checkout(@RequestBody OrderCheckoutInDTO orderCheckoutInDTO, @RequestAttribute Integer customerId){
+        Long orderId=orderService.checkout(orderCheckoutInDTO,customerId);
+        return orderId;
     }
 
     @GetMapping("/getMyWithPage")

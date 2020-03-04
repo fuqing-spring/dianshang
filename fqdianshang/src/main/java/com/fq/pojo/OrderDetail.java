@@ -10,6 +10,15 @@ public class OrderDetail {
     private Double shipPrice;
     private String comment;
     private String content;
+    private String orderProducts;
+
+    public String getOrderProducts() {
+        return orderProducts;
+    }
+
+    public void setOrderProducts(String orderProducts) {
+        this.orderProducts = orderProducts;
+    }
 
     public Long getOrderId() {
         return orderId;

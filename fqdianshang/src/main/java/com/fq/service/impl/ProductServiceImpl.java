@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductShowOut getById(Integer productId) {
+    public ProductShowOut getShowById(Integer productId) {
         Product product =productMapper.selectByPrimaryKey(productId);
         ProductDetail productDetail=productDetailMapper.selectByPrimaryKey(productId);
        ProductShowOut productShowOut=new ProductShowOut();
@@ -116,5 +116,11 @@ public class ProductServiceImpl implements ProductService {
     public void batchDelete(List<Integer> productIds) {
         productMapper.batchDelete(productIds);
         productDetailMapper.batchDelete(productIds);
+    }
+
+    @Override
+    public Product getById(Integer productId) {
+
+        return productMapper.selectByPrimaryKey(productId);
     }
 }

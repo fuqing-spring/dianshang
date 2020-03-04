@@ -1,7 +1,9 @@
 package com.fq.mapper;
 
 import com.fq.pojo.OrderDetail;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface OrderDetailMapper {
     int deleteByPrimaryKey(Long orderId);
 
