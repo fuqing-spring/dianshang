@@ -11,6 +11,7 @@ public class Customer {
     private String mobile;
     private Boolean mobileVerified;
     private String email;
+    private Boolean emailVerified;
     private Byte status;
     private Date createTime;
     private Boolean newsSubscribed;
@@ -119,5 +120,13 @@ public class Customer {
 
     public void setDefaultAddress(Integer defaultAddress) {
         this.defaultAddress = defaultAddress;
+    }
+
+    public Boolean getEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(Boolean emailVerified) {
+        this.emailVerified = emailVerified;
     }
 }

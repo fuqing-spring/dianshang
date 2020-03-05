@@ -1,77 +1,130 @@
 package com.fq.controller;
 
-import com.fq.dto.in.CustomerRegisterIn;
+import com.fq.constant.ClientExceptionConstant;
+import com.fq.dto.in.*;
+import com.fq.dto.out.CustomerGetProfileOutDTO;
+import com.fq.dto.out.CustomerLoginOutDTO;
 import com.fq.dto.out.CustomerProfileOut;
+import com.fq.exception.ClientException;
+import com.fq.pojo.Customer;
+import com.fq.service.CustomerService;
+import com.fq.util.JWTUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
+
+import javax.xml.bind.DatatypeConverter;
+import java.security.SecureRandom;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/customer")
+@CrossOrigin
 public class CustomerController {
 
-    //注册
+    @Autowired
+    CustomerService customerService;
+    @Autowired
+    JWTUtil jwtUtil;
+    @Autowired
+    SecureRandom secureRandom;
+    @Autowired
+    JavaMailSender mailSender;
+
+    private HashMap<String,String> emailPwdResetCodeMap=new HashMap<>();
+
     @PostMapping("/register")
-    public Integer register(
-            CustomerRegisterIn customerRegisterIn
-    ){
-        return null;
+    public Integer register(@RequestBody CustomerRegisterIn customerRegisterIn){
+        Integer customerId=customerService.register(customerRegisterIn);
+        return customerId;
     }
 
-    //登录
     @GetMapping("/login")
-    public String login(
-            @RequestParam String username,
-            @RequestParam String password
-    ){
-        return null;
+    public CustomerLoginOutDTO login(CustomerLonginInDTO customerLoginInDTO) throws ClientException{
+        Customer customer=customerService.getByUsername(customerLoginInDTO.getUsername());
+       if(customer==null){
+           throw new ClientException(ClientExceptionConstant.CUSTOMER_USERNAME_NOT_EXIST_ERRCODE,ClientExceptionConstant.CUSTOMER_USERNAME_NOT_EXIST_ERRMSG);
+       }
+       String encPwdDB=customer.getEncryptedPassword();
+       BCrypt.Result result=BCrypt.verifyer().verify(customerLoginInDTO.getPassword().toCharArray(), encPwdDB);
+       if (result.verified){
+           CustomerLoginOutDTO customerLoginOutDTO=jwtUtil.issueToken(customer);
+                return customerLoginOutDTO;
+       }else {
+           throw new ClientException(ClientExceptionConstant.CUSTOMER_PASSWORD_INVALID_ERRCODE,ClientExceptionConstant.CUSTOMER_PASSWORD_INVALID_ERRMSG);
+       }
+
     }
 
     @GetMapping("/getProfile")
-    public CustomerProfileOut getProfile(
-            Integer customerId
+    public CustomerGetProfileOutDTO getProfile(
+            @RequestAttribute Integer customerId
     ){
-        return null;
+        Customer customer=customerService.getById(customerId);
+        CustomerGetProfileOutDTO customerGetProfileOutDTO=new CustomerGetProfileOutDTO();
+        customerGetProfileOutDTO.setUsername(customer.getUserName());
+        customerGetProfileOutDTO.setRealName(customer.getRealName());
+        customerGetProfileOutDTO.setMobile(customer.getMobile());
+        customerGetProfileOutDTO.setMobileVerified(customer.getMobileVerified());
+        customerGetProfileOutDTO.setEmail(customer.getEmail());
+        customerGetProfileOutDTO.setEmailVerified(customer.getMobileVerified());
+        return customerGetProfileOutDTO;
     }
 
-    //修改密码
-    @PostMapping("/changePassword")
-    public void changePassword(
-            @RequestParam String originPwd,
-            @RequestParam String newPwd,
-            Integer customerId
+    @PostMapping("/updateProfile")
+    public void updateProfile(@RequestBody CustomerUpdateProfileInDTO customerUpdateProfileInDTO,@RequestAttribute Integer customerId
     ){
-
-    }
-
-    @GetMapping("/sendPwdResetCodeToEmail")
-    public void sendPwdResetCodeToEmail(
-            String email
-    ){
-
-    }
-
-    @PostMapping("/resetPwdByEmail")
-    public void resetPwdByEmail(
-            @RequestParam String email,
-            @RequestParam String code,
-            @RequestParam String newPwd
-    ){
+        Customer customer=new Customer();
+        customer.setCustomerId(customerId);
+        customer.setRealName(customerUpdateProfileInDTO.getRealName());
+        customer.setMobile(customerUpdateProfileInDTO.getMobile());
+        customer.setEmail(customerUpdateProfileInDTO.getEmail());
+        customerService.update(customer);
 
     }
 
-    @GetMapping("/sendPwdResetCodeToMobile")
-    public void sendPwdResetCodeToMobile(
-            String mobile
-    ){
+    @PostMapping("/changePwd")
+    public void changePwd(@RequestBody CustomerChangePwdInDTO customerChangePwdInDTO,@RequestAttribute Integer customerId
+                          ) throws ClientException{
+        Customer customer=customerService.getById(customerId);
+        String encPwdDB=customer.getEncryptedPassword();
+        BCrypt.Result result=BCrypt.verifyer().verify(customerChangePwdInDTO.getOriginPwd().toCharArray(), encPwdDB);
+
+        if (result.verified){
+            String newPwd=customerChangePwdInDTO.getNewPwd();
+            String bcryptHashString =BCrypt.withDefaults().hashToString(12, newPwd.toCharArray());
+            customer.setEncryptedPassword(bcryptHashString);
+            customerService.update(customer);
+        }else {
+            throw new ClientException(ClientExceptionConstant.CUSTOMER_PASSWORD_INVALID_ERRCODE,ClientExceptionConstant.CUSTOMER_PASSWORD_INVALID_ERRMSG);
+        }
+
 
     }
 
-    @PostMapping("/resetPwdByMobile")
-    public void resetPwdByMobile(
-            @RequestParam String mobile,
-            @RequestParam String code,
-            @RequestParam String newPwd
-    ){
-
+    @GetMapping("/getPwdResetCode")
+    public void getPwdResetCode(
+            @RequestParam String email
+    ) throws ClientException {
+        Customer customer=customerService.getByEmail(email);
+        if (customer==null){
+            throw new ClientException(ClientExceptionConstant.CUSTOMER_USERNAME_NOT_EXIST_ERRCODE,ClientExceptionConstant.CUSTOMER_USERNAME_NOT_EXIST_ERRMSG);
+        }
+        byte[] bytes=secureRandom.generateSeed(3);
+        String hex= DatatypeConverter.printHexBinary(bytes);
+        SimpleMailMessage message=new SimpleMailMessage();
+        message.setFrom(fromEmail);
+        message.setTo(email);
+        message.setSubject("jcart重置密码");
+        message.setText(hex);
+        mailSender.send(message);
+        emailPwdResetCodeMap.put("PwdResetCode"+email,hex);
     }
+
+  @PostMapping("/resetPwd")
+    public void resetPwd(@RequestBody CustomerResetPwdInDTO customerResetPwdInDTO){
+
+  }
 
 }

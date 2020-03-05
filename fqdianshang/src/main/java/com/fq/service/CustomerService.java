@@ -1,17 +1,17 @@
 package com.fq.service;
 
+import com.fq.dto.in.CustomerRegisterIn;
 import com.fq.pojo.Customer;
 
 public interface CustomerService {
-    int deleteByPrimaryKey(Integer customerId);
 
-    int insert(Customer record);
+    Integer register(CustomerRegisterIn customerRegisterIn);
 
-    int insertSelective(Customer record);
+    Customer getByUsername(String username);
 
-    Customer selectByPrimaryKey(Integer customerId);
+    Customer getById(Integer customerId);
 
-    int updateByPrimaryKeySelective(Customer record);
+    void update(Customer customer);
 
-    int updateByPrimaryKey(Customer record);
+    Customer getByEmail(String email);
 }

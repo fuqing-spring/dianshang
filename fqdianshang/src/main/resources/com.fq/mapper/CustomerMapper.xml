@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fq.mapper.CustomerMapper">
-    <select id="selectByPrimaryKey">
+    <select id="selectByPrimaryKey" resultType="com.fq.pojo.Customer">
         select
         from jcart_customer
         where customer_id = #{customerId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByUsername" resultType="com.fq.pojo.Customer">
+    select * from jcart_customer where username=#{username};
+    </select>
+    <select id="selectByEmail" resultType="com.fq.pojo.Customer">
+    select * from jcart_customer where email =#{email};
+
+
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from jcart_customer
@@ -100,6 +108,11 @@
                 #{defaultAddressId,jdbcType=INTEGER},
             </if>
         </trim>
+    </insert>
+    <insert id="insert">
+
+
+
     </insert>
     <update id="updateByPrimaryKeySelective">
         update jcart_customer

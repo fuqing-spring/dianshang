@@ -3,7 +3,7 @@ package com.fq.dto.in;
 public class CustomerRegisterIn {
     private String userName;
     private String realName;
-    private String bobile;
+    private String mobile;
     private String email;
     private String password;
     private Boolean newsSubscribed;
@@ -24,12 +24,12 @@ public class CustomerRegisterIn {
         this.realName = realName;
     }
 
-    public String getBobile() {
-        return bobile;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setBobile(String bobile) {
-        this.bobile = bobile;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getEmail() {

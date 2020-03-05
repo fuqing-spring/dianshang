@@ -1,7 +1,10 @@
 package com.fq.mapper;
 
 import com.fq.pojo.Customer;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CustomerMapper {
     int deleteByPrimaryKey(Integer customerId);
 
@@ -14,4 +17,10 @@ public interface CustomerMapper {
     int updateByPrimaryKeySelective(Customer record);
 
     int updateByPrimaryKey(Customer record);
+
+//    custom
+
+    Customer selectByUsername(@Param("username") String username);
+
+    Customer selectByEmail(@Param("email") String email);
 }

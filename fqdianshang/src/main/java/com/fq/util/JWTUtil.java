@@ -1,8 +1,7 @@
 package com.fq.util;
 
-import com.fq.dto.out.AdministratorLoginOutDTO;
-import com.fq.pojo.Administrator;
-import com.fq.vo.AdministratorLoginVO;
+import com.fq.dto.out.CustomerLoginOutDTO;
+import com.fq.pojo.Customer;
 import com.sun.javafx.scene.traversal.Algorithm;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,37 +22,41 @@ public class JWTUtil {
         logger.info("init jwt util");
         algorithm=Algorithm.HMAC256(jwtHS256Secret);
     }
-    public AdministratorLoginOutDTO issueToken(Administrator administrator){
-        Date now=new Date();
-        long nowTimestamp=now.getTime();
-        long expireTimestamp=nowTimestamp + jwtValidDuration;
-        Date expireTime=new Date(expireTimestamp);
-        Integer administratorId=administrator.getAdministratorId();
-        String username=administrator.getUserName();
-        String token =JWT.create() .withIssuer(issuer)
+    public CustomerLoginOutDTO issueToken(Customer customer) {
+        Date now = new Date();
+        long nowTimestamp = now.getTime();
+        long expireTimestamp = nowTimestamp + jwtValidDuration;
+        Date expireTime = new Date(expireTimestamp);
+        Integer customerId = customer.getCustomerId();
+        String username = customer.getUsername();
+
+        String token = JWT.create()
+                .withIssuer(issuer)
                 .withIssuedAt(now)
                 .withSubject(username)
-                .withClaim("administratorId", administratorId)
+                .withClaim("customerId", customerId)
                 .withExpiresAt(expireTime)
                 .sign(algorithm);
-        logger.info("jwt token: {}",token);
+
+        logger.info("jwt token: {}", token);
         logger.info("jwt expire date: {}", expireTimestamp);
-        AdministratorLoginOutDTO administratorLoginOutDTO = new AdministratorLoginOutDTO();
-        administratorLoginOutDTO.setToken(token);
-        administratorLoginOutDTO.setExpireTimestamp(expireTimestamp);
+        CustomerLoginOutDTO customerLoginOutDTO = new CustomerLoginOutDTO();
+        customerLoginOutDTO.setToken(token);
+        customerLoginOutDTO.setExpireTimestamp(expireTimestamp);
 
-        return administratorLoginOutDTO;
-
+        return customerLoginOutDTO;
     }
-    public AdministratorLoginVO verifyToken(String token) {
+
+    public CustomerLoginVO verifyToken(String token) {
         JWTVerifier verifier = JWT.require(algorithm)
                 .withIssuer(issuer)
                 .build();
         DecodedJWT jwt;
         jwt = verifier.verify(token);
 
-        AdministratorLoginVO administratorLoginVO = new AdministratorLoginVO();
-        administratorLoginVO.setAdministratorId(jwt.getClaim("administratorId").asInt());
-        administratorLoginVO.setUsername(jwt.getSubject());
-        return administratorLoginVO;
+        CustomerLoginVO customerLoginVO = new CustomerLoginVO();
+        customerLoginVO.setCustomerId(jwt.getClaim("customerId").asInt());
+        customerLoginVO.setUsername(jwt.getSubject());
+        return customerLoginVO;
+    }
 }
