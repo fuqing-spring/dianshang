@@ -1,17 +1,11 @@
 package com.fq.service;
 
-import com.fq.pojo.Product;
+import com.fq.pojo.ReturnHistory;
+
+import java.util.List;
 
 public interface ResturnHistoryService {
-    int deleteByPrimaryKey(Integer productId);
 
-    int insert(Product record);
 
-    int insertSelective(Product record);
-
-    Product selectByPrimaryKey(Integer productId);
-
-    int updateByPrimaryKeySelective(Product record);
-
-    int updateByPrimaryKey(Product record);
+    List<ReturnHistory> getByReturnId(Integer returnId);
 }

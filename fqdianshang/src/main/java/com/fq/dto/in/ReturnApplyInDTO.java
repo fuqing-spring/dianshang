@@ -1,42 +1,17 @@
-package com.fq.dto.out;
+package com.fq.dto.in;
 
-import java.util.List;
-
-public class ReturnShowOutDTO {
-    private Integer returnId;
+public class ReturnApplyInDTO {
     private Long orderId;
     private Long orderTimestamp;
-    private Integer customerId;
     private String customerName;
     private String mobile;
     private String email;
-    private Byte status;
-    private Byte action;
     private String productCode;
     private String productName;
     private Integer quantity;
     private Byte reason;
     private Boolean opened;
     private String comment;
-    private Long createTimestamp;
-    private Long updateTimestamp;
-    public List<ReturnHistoryListOutDTO> returnHistories;
-
-    public List<ReturnHistoryListOutDTO> getReturnHistories() {
-        return returnHistories;
-    }
-
-    public void setReturnHistories(List<ReturnHistoryListOutDTO> returnHistories) {
-        this.returnHistories = returnHistories;
-    }
-
-    public Integer getReturnId() {
-        return returnId;
-    }
-
-    public void setReturnId(Integer returnId) {
-        this.returnId = returnId;
-    }
 
     public Long getOrderId() {
         return orderId;
@@ -52,14 +27,6 @@ public class ReturnShowOutDTO {
 
     public void setOrderTimestamp(Long orderTimestamp) {
         this.orderTimestamp = orderTimestamp;
-    }
-
-    public Integer getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
     }
 
     public String getCustomerName() {
@@ -84,22 +51,6 @@ public class ReturnShowOutDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public Byte getAction() {
-        return action;
-    }
-
-    public void setAction(Byte action) {
-        this.action = action;
     }
 
     public String getProductCode() {
@@ -148,21 +99,5 @@ public class ReturnShowOutDTO {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public Long getCreateTimestamp() {
-        return createTimestamp;
-    }
-
-    public void setCreateTimestamp(Long createTimestamp) {
-        this.createTimestamp = createTimestamp;
-    }
-
-    public Long getUpdateTimestamp() {
-        return updateTimestamp;
-    }
-
-    public void setUpdateTimestamp(Long updateTimestamp) {
-        this.updateTimestamp = updateTimestamp;
     }
 }

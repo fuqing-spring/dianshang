@@ -1,15 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fq.mapper.ResturnHistoryMapper">
-    <insert id="insert"></insert>
+    <insert id="insert">
+         insert into jcart_return_history (return_history_id, return_id, time,
+      return_status, comment, customer_notified
+      )
+    values (#{returnHistoryId,jdbcType=BIGINT}, #{returnId,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP},
+      #{returnStatus,jdbcType=TINYINT}, #{comment,jdbcType=VARCHAR}, #{customerNotified,jdbcType=BIT}
+      )
+    </insert>
 
-    <insert id="insertSelective"></insert>
+    <insert id="insertSelective">
+        insert into jcart_return_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="returnHistoryId != null">
+                return_history_id,
+            </if>
+            <if test="returnId != null">
+                return_id,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="returnStatus != null">
+                return_status,
+            </if>
+            <if test="comment != null">
+                comment,
+            </if>
+            <if test="customerNotified != null">
+                customer_notified,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="returnHistoryId != null">
+                #{returnHistoryId,jdbcType=BIGINT},
+            </if>
+            <if test="returnId != null">
+                #{returnId,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="returnStatus != null">
+                #{returnStatus,jdbcType=TINYINT},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="customerNotified != null">
+                #{customerNotified,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
 
-    <update id="updateByPrimaryKeySelective"></update>
+    <update id="updateByPrimaryKeySelective">
+        update jcart_return_history
+        <set>
+            <if test="returnId != null">
+                return_id = #{returnId,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="returnStatus != null">
+                return_status = #{returnStatus,jdbcType=TINYINT},
+            </if>
+            <if test="comment != null">
+                comment = #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="customerNotified != null">
+                customer_notified = #{customerNotified,jdbcType=BIT},
+            </if>
+        </set>
+        where return_history_id = #{returnHistoryId,jdbcType=BIGINT}
+    </update>
 
-    <update id="updateByPrimaryKey"></update>
+    <update id="updateByPrimaryKey">
+        update jcart_return_history
+    set return_id = #{returnId,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      return_status = #{returnStatus,jdbcType=TINYINT},
+      comment = #{comment,jdbcType=VARCHAR},
+      customer_notified = #{customerNotified,jdbcType=BIT}
+    where return_history_id = #{returnHistoryId,jdbcType=BIGINT}
+    </update>
 
-    <delete id="deleteByPrimaryKey"></delete>
+    <delete id="deleteByPrimaryKey">
+          delete from jcart_return_history
+    where return_history_id = #{returnHistoryId,jdbcType=BIGINT}
+    </delete>
 
-    <select id="selectByPrimaryKey" resultType="com.fq.pojo.Product"></select>
+    <select id="selectByPrimaryKey" resultType="com.fq.pojo.Product">
+        select * from jcart_return_history where return_history_id = #{returnHistoryId,jdbcType=BIGINT};
+    </select>
+    <select id="selectByReturnId" resultType="com.fq.pojo.ReturnHistory">
+        select * from jcart_return_history
+    where return_id = #{returnId}
+    order by `time` desc
+    </select>
 </mapper>

@@ -1,17 +1,13 @@
 package com.fq.service;
 
 import com.fq.pojo.Return;
+import com.github.pagehelper.Page;
 
 public interface ResturnService {
-    int deleteByPrimaryKey(Integer returnId);
 
-    int insert(Return record);
+    Integer create(Return aReturn);
 
-    int insertSelective(Return record);
+    Page<Return> getPageByCustomerId(Integer customerId, Integer pageNum);
 
-    Return selectByPrimaryKey(Integer returnId);
-
-    int updateByPrimaryKeySelective(Return record);
-
-    int updateByPrimaryKey(Return record);
+    Return getById(Integer returnId);
 }
