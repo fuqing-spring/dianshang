@@ -1,36 +1,19 @@
 package com.fq.service.impl;
 
+import com.fq.mapper.OrderHistoryMapper;
 import com.fq.pojo.OrderHistory;
 import com.fq.service.OrderHistoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class OrderHistoryServiceImpl implements OrderHistoryService {
-    @Override
-    public int deleteByPrimaryKey(Long orderHistoryId) {
-        return 0;
-    }
+    @Autowired
+    OrderHistoryMapper orderHistoryMapper;
 
     @Override
-    public int insert(OrderHistory record) {
-        return 0;
-    }
-
-    @Override
-    public int insertSelective(OrderHistory record) {
-        return 0;
-    }
-
-    @Override
-    public OrderHistory selectByPrimaryKey(Long orderHistoryId) {
-        return null;
-    }
-
-    @Override
-    public int updateByPrimaryKeySelective(OrderHistory record) {
-        return 0;
-    }
-
-    @Override
-    public int updateByPrimaryKey(OrderHistory record) {
-        return 0;
+    public List<OrderHistory> getByOrderId(Long orderId) {
+        List<OrderHistory> orderHistories=orderHistoryMapper.selectByOrderId(orderId);
+        return orderHistories;
     }
 }

@@ -12,4 +12,5 @@
     <delete id="deleteByPrimaryKey"></delete>
 
     <select id="selectByPrimaryKey" resultType="com.fq.pojo.OrderHistory"></select>
+    <select id="selectByOrderId" resultType="com.fq.pojo.OrderHistory"></select>
 </mapper>
