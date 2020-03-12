@@ -32,7 +32,7 @@ public class ProductController {
 
     @GetMapping("/getById")
     public ProductShowOut getById(@RequestParam Integer productId){
-    ProductShowOut productShowOut=productService.getById(productId);
+    ProductShowOut productShowOut = productService.getById(productId);
         return productShowOut;
     }
 

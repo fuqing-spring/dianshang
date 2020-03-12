@@ -27,7 +27,7 @@ public class Order {
         this.customerId = customerId;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
